@@ -1,0 +1,86 @@
+{% include 'user_navigation.html' %}
+
+
+<marquee style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    Apply Now
+</marquee>
+<hr>
+<form class="container mt-5" onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-row">
+        <div class="form-group col-md-6" >
+            <label>First Name</label>
+            <input type="text" class="form-control" value="{{user.first_name}}" name="fname" readonly>
+        </div>
+
+        <div class="form-group col-md-6" >
+            <label>Last Name</label>
+            <input type="text" class="form-control" value="{{user.last_name}}" name="lname" readonly>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12" >
+            <label>Contact Number:</label>
+            <input type="text" class="form-control" name="contact" placeholder="Enter Phone Number" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12" >
+            <label>Email ID:</label>
+            <input type="text" class="form-control" value="{{user.username}}" name="email" readonly>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6" >
+            <label>Experience:</label>
+            <input type="number" class="form-control" name="exp" placeholder="Total Experience in yeas" >
+        </div>
+
+        <div class="form-group col-md-6" >
+            <label>Qualification:</label>
+            <input type="text" class="form-control" name="que" placeholder="Your Qualification" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6" >
+            <label>Gender</label>
+            <div style="border:1px solid lightgrey ; padding:6px ; border-radius:6px">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInLine1" name="gender" class="custom-control-input" value="Male">
+                <label class="custom-control-label" for="customRadioInLine1">Male</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInLine2" name="gender" class="custom-control-input" value="Female">
+                <label class="custom-control-label" for="customRadioInLine2">Female</label>
+            </div>
+                </div>
+        </div>
+
+        <div class="form-group col-md-6" >
+            <label>Profile Picture:</label>
+            <input type="file" class="form-control" name="image" required>
+        </div>
+    </div>
+<input type="submit" value="Apply Now" class="btn btn-primary my-3" style="width:200px">
+</form>
+
+
+{% if error == "no" %}
+<script>
+    alert(" Applyed Successfully")
+    window.location = ('{% url 'view_job_user' %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Somthing Wrong, Try Again...")
+</script>
+{% endif %}
+
+{% include 'footer.html' %}
